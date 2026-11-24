@@ -88,10 +88,7 @@ app/src/main/
 
 ## 🎬 Как работает приложение
 
-<video width="100%" controls>
-  <source src="demo.mp4" type="video/mp4">
-  Ваш браузер не поддерживает встроенное видео. [Скачать демонстрацию](demo.mp4).
-</video>
+https://github.com/user-attachments/assets/68a7c7c6-e114-4df1-bc2c-7e4e960bbe1f
 
 [Смотреть/скачать MP4](demo.mp4)
 
