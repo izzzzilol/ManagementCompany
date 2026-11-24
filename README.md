@@ -83,7 +83,7 @@ app/src/main/
 
 ## 📄 Документы проекта
 
-- [Курсовая работа (DOCX)](https://github.com/izzzzilol/ManagementCompany/blob/main/%D0%BA%D1%83%D1%80%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%80%D0%BA%D0%B8%D1%81%20%D0%A2%D0%B0%D1%80%D0%B0%D1%81%D0%BE%D0%B2%D0%B0.docx) — пояснительная записка со стеком, UML/ER-моделями, SQL-схемой и результатами тестирования. [Скачать файл](https://raw.githubusercontent.com/izzzzilol/ManagementCompany/main/%D0%BA%D1%83%D1%80%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%80%D0%BA%D0%B8%D1%81%20%D0%A2%D0%B0%D1%80%D0%B0%D1%81%D0%BE%D0%B2%D0%B0.docx).
+- [Курсовая работа (DOCX)](https://github.com/izzzzilol/ManagementCompany/blob/main/курсовая%20ркис%20Тарасова.docx) — пояснительная записка со стеком, UML/ER-моделями, SQL-схемой и результатами тестирования.
 - [Готовый APK](ManagementCompany.apk) — отладочная сборка для установки на устройство.
 
 ## 🎬 Как работает приложение
