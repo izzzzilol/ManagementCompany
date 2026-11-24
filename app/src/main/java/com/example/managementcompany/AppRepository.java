@@ -151,6 +151,17 @@ public class AppRepository {
         }
     }
 
+    /** Смена статуса выполняется в транзакции Room. */
+    public int setStatus(TableDefinition def, long id, String column, String value) {
+        if ("zaivki".equals(def.getKey()) && "Status".equals(column)) {
+            return dao.setRequestStatus(id, value);
+        }
+        if ("nachislenie".equals(def.getKey()) && "PaymentStatus".equals(column)) {
+            return dao.setChargeStatus(id, value);
+        }
+        return update(def, id, java.util.Collections.singletonMap(column, value));
+    }
+
     /** Room живёт всё время работы приложения, поэтому закрывать его не нужно. */
     public void close() { }
 

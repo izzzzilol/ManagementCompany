@@ -164,12 +164,7 @@ public class DetailActivity extends Activity {
     }
 
     private void setStatus(Record record, String column, String value) {
-        Map<String, String> values = new LinkedHashMap<>();
-        for (TableDefinition.Column col : def.getColumns()) {
-            values.put(col.name, record.get(col.name));
-        }
-        values.put(column, value);
-        db.update(def, recordId, values);
+        db.setStatus(def, recordId, column, value);
         Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
         render();
     }

@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.RawQuery;
+import androidx.room.Transaction;
 import androidx.room.Update;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
@@ -109,4 +110,14 @@ public interface AppDao {
 
     @Query("SELECT COUNT(*) FROM Zaivki WHERE Status IN ('Новая', 'В работе')")
     int countActiveRequests();
+
+    /** Атомарная смена статуса заявки (аппарат транзакций Room). */
+    @Transaction
+    @Query("UPDATE Zaivki SET Status = :status WHERE Id = :id")
+    int setRequestStatus(long id, String status);
+
+    /** Атомарная смена статуса оплаты (аппарат транзакций Room). */
+    @Transaction
+    @Query("UPDATE Nachislenie SET PaymentStatus = :status WHERE Id = :id")
+    int setChargeStatus(long id, String status);
 }
