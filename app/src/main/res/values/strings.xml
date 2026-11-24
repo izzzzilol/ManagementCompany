@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Управляющая компания</string>
+    <string name="title_main">Управляющая компания</string>
+    <string name="hint_main">Реестр собственников, домов, начислений и заявок</string>
+    <string name="search_hint">Поиск по таблице…</string>
+    <string name="add_record">Добавить</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="records_count">Записей: %1$d</string>
+    <string name="saved">Изменения сохранены</string>
+    <string name="deleted">Запись удалена</string>
+    <string name="fill_required">Заполните все поля</string>
+    <string name="confirm_delete">Удалить выбранную запись?</string>
+
+    <string name="nav_first">В начало</string>
+    <string name="nav_prev">‹</string>
+    <string name="nav_next">›</string>
+    <string name="nav_last">В конец</string>
+    <string name="find">Найти</string>
+    <string name="record_number">№</string>
+    <string name="open">Открыть</string>
+    <string name="edit_record">Изменить</string>
+    <string name="owner_card">Карточка собственника</string>
+    <string name="status_loaded">Данные загружены успешно.</string>
+    <string name="status_empty">Таблица пустая или данные не найдены.</string>
+    <string name="no_selection">Сначала выберите запись</string>
+    <string name="list_hint">Нажмите на запись, чтобы открыть • Удерживайте, чтобы выбрать</string>
+
+    <string name="title_add">Новая запись</string>
+    <string name="title_edit">Изменение записи</string>
+    <string name="title_detail">Просмотр записи</string>
+    <string name="section_main">Основная информация</string>
+    <string name="section_related">Связанные записи</string>
+    <string name="empty_related">Нет связанных записей</string>
+
+    <string name="owner_card_title">Карточка собственника</string>
+    <string name="tab_owner">Собственник</string>
+    <string name="tab_records">Записи</string>
+    <string name="section_apartments">Квартиры собственника</string>
+    <string name="section_requests">Заявки</string>
+    <string name="section_charges">Начисления</string>
+    <string name="footer_db">Локальная база данных · SQLite</string>
+
+    <!-- Рабочий стол -->
+    <string name="dashboard_overview">Обзор</string>
+    <string name="dashboard_houses">Дома</string>
+    <string name="dashboard_apartments">Квартиры</string>
+    <string name="dashboard_owners">Собственники</string>
+    <string name="dashboard_active_requests">Заявки в работе</string>
+    <string name="dashboard_charges">Начисления</string>
+    <string name="dashboard_expenses">Расходы</string>
+    <string name="dashboard_finance">Финансы за период</string>
+    <string name="dashboard_paid">Оплачено</string>
+    <string name="dashboard_unpaid">Не оплачено</string>
+    <string name="dashboard_recent">Последние заявки</string>
+    <string name="dashboard_quick">Быстрые действия</string>
+    <string name="dashboard_new_request">Новая заявка</string>
+    <string name="dashboard_new_charge">Новое начисление</string>
+    <string name="dashboard_new_owner">Собственник</string>
+    <string name="dashboard_registers">Реестры</string>
+    <string name="dashboard_empty_requests">Активных заявок нет</string>
+
+    <!-- Рабочие статусы -->
+    <string name="status_new">Новая</string>
+    <string name="status_in_progress">В работе</string>
+    <string name="status_done">Выполнено</string>
+    <string name="status_paid">Оплачено</string>
+    <string name="status_not_paid">Не оплачено</string>
+    <string name="section_status">Статус заявки</string>
+    <string name="section_payment">Статус оплаты</string>
+</resources>
