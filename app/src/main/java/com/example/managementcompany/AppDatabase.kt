@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 /** Локальная база данных на Room. */
@@ -17,7 +18,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         RequestEntity::class,
         ExpenseEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -27,6 +28,44 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
 
         const val DATABASE_NAME = "uk.sqlite"
+
+        /**
+         * Миграция с первой версии БД: старые установки содержали таблицы без NOT NULL
+         * и без триггеров целостности. Пересоздаём схему и заполняем её заново.
+         */
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                dropTables(db)
+                createTables(db)
+                seed(db)
+            }
+        }
+
+        private fun dropTables(db: SupportSQLiteDatabase) {
+            db.execSQL("DROP TABLE IF EXISTS `Houses`")
+            db.execSQL("DROP TABLE IF EXISTS `Kvartira`")
+            db.execSQL("DROP TABLE IF EXISTS `Cobstveniki`")
+            db.execSQL("DROP TABLE IF EXISTS `Yslygi`")
+            db.execSQL("DROP TABLE IF EXISTS `Nachislenie`")
+            db.execSQL("DROP TABLE IF EXISTS `Zaivki`")
+            db.execSQL("DROP TABLE IF EXISTS `Rashod`")
+        }
+
+        private fun createTables(db: SupportSQLiteDatabase) {
+            db.execSQL("CREATE TABLE `Houses` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Address` TEXT NOT NULL, `YearBuilt` INTEGER NOT NULL, `Floors` INTEGER NOT NULL, `Entrances` INTEGER NOT NULL)")
+            db.execSQL("CREATE TABLE `Cobstveniki` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `LastName` TEXT NOT NULL, `FirstName` TEXT NOT NULL, `MiddleName` TEXT NOT NULL, `Phone` TEXT NOT NULL, `PassportSeries` TEXT NOT NULL, `PassportNumber` TEXT NOT NULL)")
+            db.execSQL("CREATE TABLE `Yslygi` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Name` TEXT NOT NULL, `Tariff` REAL NOT NULL)")
+            db.execSQL("CREATE TABLE `Kvartira` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `HouseId` INTEGER NOT NULL, `ApartmentNumber` INTEGER NOT NULL, `EntranceNumber` INTEGER NOT NULL, `Area` REAL NOT NULL, `OwnerId` INTEGER NOT NULL, FOREIGN KEY(`HouseId`) REFERENCES `Houses`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`OwnerId`) REFERENCES `Cobstveniki`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+            db.execSQL("CREATE INDEX `index_Kvartira_HouseId` ON `Kvartira` (`HouseId`)")
+            db.execSQL("CREATE INDEX `index_Kvartira_OwnerId` ON `Kvartira` (`OwnerId`)")
+            db.execSQL("CREATE TABLE `Nachislenie` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ApartmentId` INTEGER NOT NULL, `ServiceId` INTEGER NOT NULL, `Period` TEXT NOT NULL, `Amount` REAL NOT NULL, `ChargeDate` TEXT NOT NULL, `PaymentStatus` TEXT NOT NULL, FOREIGN KEY(`ApartmentId`) REFERENCES `Kvartira`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`ServiceId`) REFERENCES `Yslygi`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+            db.execSQL("CREATE INDEX `index_Nachislenie_ApartmentId` ON `Nachislenie` (`ApartmentId`)")
+            db.execSQL("CREATE INDEX `index_Nachislenie_ServiceId` ON `Nachislenie` (`ServiceId`)")
+            db.execSQL("CREATE TABLE `Zaivki` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OwnerId` INTEGER NOT NULL, `RequestDate` TEXT NOT NULL, `Description` TEXT NOT NULL, `Status` TEXT NOT NULL, FOREIGN KEY(`OwnerId`) REFERENCES `Cobstveniki`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+            db.execSQL("CREATE INDEX `index_Zaivki_OwnerId` ON `Zaivki` (`OwnerId`)")
+            db.execSQL("CREATE TABLE `Rashod` (`Id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ExpenseItem` TEXT NOT NULL, `Amount` REAL NOT NULL, `Date` TEXT NOT NULL, `HouseId` INTEGER NOT NULL, FOREIGN KEY(`HouseId`) REFERENCES `Houses`(`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+            db.execSQL("CREATE INDEX `index_Rashod_HouseId` ON `Rashod` (`HouseId`)")
+        }
 
         @Volatile
         var instance: AppDatabase? = null
@@ -40,6 +79,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .allowMainThreadQueries()
+                    .addMigrations(MIGRATION_1_2)
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
