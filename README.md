@@ -4,7 +4,7 @@
 
 **Локальное Android-приложение для учёта жилого фонда, собственников, начислений и заявок**
 
-![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-AGP%209.4-A97BFF?logo=kotlin&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-24%2B-3DDC84?logo=android&logoColor=white)
 ![Room](https://img.shields.io/badge/Room-2.8.5-4285F4?logo=android&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-9.6-02303A?logo=gradle&logoColor=white)
@@ -22,7 +22,7 @@
 действиями. Из него открываются семь реестров с полным CRUD, поиском, карточками записей
 и переходами между связанными объектами.
 
-> **Коротко:** 7 таблиц, Room, современный интерфейс на системных виджетах, ноль сторонних UI-библиотек.
+> **Коротко:** Kotlin, 7 таблиц, Room, современный интерфейс на системных виджетах, ноль сторонних UI-библиотек.
 
 ## ✨ Возможности
 
@@ -38,14 +38,14 @@
 
 | Слой | Технология |
 | --- | --- |
-| Язык | **Java 17** |
+| Язык | **Kotlin** (встроенный компилятор AGP 9.4, JVM target 17) |
 | Платформа | **Android**, minSdk 24 / targetSdk 37 |
 | База данных | **Android Room 2.8.5** (`@Entity`, `@Dao`, `@Database`) |
-| Сборка | **Gradle 9.6.0** + **Android Gradle Plugin 9.4.0** |
+| Сборка | **Gradle 9.6.0** + **Android Gradle Plugin 9.4.0** (встроенный Kotlin, `legacy-kapt`) |
 | UI | Framework-виджеты, XML-лэйауты, кастомные `@drawable` и `@style` |
 | Архитектура | `Activity` → `AppRepository` → `AppDao` → `AppDatabase` |
 
-Без Kotlin, без Compose, без сторонних библиотек — только платформенные API и Room.
+Без Compose и без сторонних UI-библиотек — только платформенные API и Room.
 
 ## 🗂 Структура данных
 
@@ -67,16 +67,16 @@
 ```text
 app/src/main/
 ├── java/com/example/managementcompany/
-│   ├── MainActivity.java        # рабочий стол
-│   ├── TableActivity.java       # реестр таблицы + панель команд
-│   ├── RecordActivity.java      # добавление / изменение
-│   ├── DetailActivity.java      # просмотр записи и статусы
-│   ├── OwnerCardActivity.java   # карточка собственника
-│   ├── AppRepository.java       # API для экранов
-│   ├── AppDatabase.java         # синглтон Room + сиды
-│   ├── AppDao.java              # запросы
-│   ├── *Entity.java             # 7 сущностей
-│   ├── Ui.java / FormFields.java / TableDefinition.java
+│   ├── MainActivity.kt          # рабочий стол
+│   ├── TableActivity.kt         # реестр таблицы + панель команд
+│   ├── RecordActivity.kt        # добавление / изменение
+│   ├── DetailActivity.kt        # просмотр записи и статусы
+│   ├── OwnerCardActivity.kt     # карточка собственника
+│   ├── AppRepository.kt         # API для экранов
+│   ├── AppDatabase.kt           # синглтон Room + сиды
+│   ├── AppDao.kt                # запросы
+│   ├── *Entity.kt               # 7 сущностей
+│   ├── Ui.kt / FormFields.kt / TableDefinition.kt
 ├── res/layout/                  # экраны и шапка
 └── res/drawable/                # однотонные кнопки и карточки
 ```

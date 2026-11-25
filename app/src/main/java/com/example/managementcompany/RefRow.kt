@@ -1,13 +1,12 @@
-package com.example.managementcompany;
+package com.example.managementcompany
 
-import androidx.room.ColumnInfo;
+import androidx.room.ColumnInfo
 
 /** Строка справочника: идентификатор и отображаемое название. */
-public class RefRow {
-
+data class RefRow(
     @ColumnInfo(name = "Id")
-    public long Id;
+    val Id: Long = 0L,
 
     @ColumnInfo(name = "label")
-    public String label;
-}
+    val label: String? = null
+)
